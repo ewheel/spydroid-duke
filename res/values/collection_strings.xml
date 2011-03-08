@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_IMEI">IMEI</string>
+    <string name="sum_IMEI">Allow SpyDroid to access this device\'s IMEI</string>
+</resources>
