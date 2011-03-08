@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="stealth_level">
+        <item name="low">@string/stealth_low</item>
+        <item name="med">@string/stealth_med</item>
+        <item name="high">@string/stealth_high</item>
+    </string-array>
+    <string-array name="stealth_level_values">
+        <item name="low">1</item>
+        <item name="med">2</item>
+        <item name="high">3</item>
+    </string-array>
+</resources>

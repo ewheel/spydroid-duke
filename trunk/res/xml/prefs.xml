@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="@string/cat_general"
+		android:key="pref_general" android:order="1">
+		<CheckBoxPreference android:key="pref_enable_collection"
+			android:title="@string/data_collection" android:defaultValue="true" android:order="1" android:summaryOff="@string/pref_data_off" android:summaryOn="@string/pref_data_on"></CheckBoxPreference>
+		<Preference android:title="@string/clear_data" android:key="pref_clear_data"
+			android:summary="@string/pref_clear_data" android:order="2"></Preference>
+	</PreferenceCategory>
+	<PreferenceCategory android:key="pref_collections"
+		android:order="2" android:title="@string/cat_collections">
+		<PreferenceScreen android:summary="@string/collect_descr"
+			android:key="pref_collections_nested" android:title="@string/collect_types">
+			<CheckBoxPreference android:key="col_IMEI"
+				android:summary="@string/sum_IMEI" android:title="@string/title_IMEI"
+				android:defaultValue="true"></CheckBoxPreference>
+		</PreferenceScreen>
+	</PreferenceCategory>
+	<PreferenceCategory android:key="pref_network"
+		android:title="@string/cat_network" android:order="3">
+		<CheckBoxPreference android:summary="@string/net_allow_descr"
+			android:title="@string/net_allow" android:key="pref_allow_network"
+			android:order="1" android:defaultValue="false"></CheckBoxPreference>
+		<EditTextPreference android:key="pref_edit_server_addr"
+			android:title="@string/net_server_addr" android:dialogMessage="@string/net_serv_descr"
+			android:dialogTitle="@string/net_diag_title" android:defaultValue="http://cs.duke.edu"
+			android:order="2"></EditTextPreference>
+	</PreferenceCategory>
+	<PreferenceCategory android:order="4" android:key="pref_stealth"
+		android:title="@string/cat_stealth">
+		<ListPreference android:key="pref_stealth_list"
+			android:title="@string/stealth_edit" android:entries="@array/stealth_level"
+			android:entryValues="@array/stealth_level_values" android:order="1"
+			android:defaultValue="low" android:summary="@string/stealth_descr"></ListPreference>
+	</PreferenceCategory>
+</PreferenceScreen>

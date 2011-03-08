@@ -13,6 +13,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:label="@string/menu_pref" android:name=".view.PreferenceController"></activity>
+        <activity android:name=".view.ClearDataPaneController" android:label="@string/clear_data"></activity>
 
     </application>
 </manifest>

@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, We\'re Watching you</string>
-    <string name="app_name">SpyDroid</string>
+	<string name="data_collection">Data collection</string>
+	<string name="view_data">View collected data</string>
+	<string name="clear_data">Clear stored data</string>
+	<string name="app_name">SpyDroid</string>
+	<string name="cat_collections">Data collection methods</string>
+	<string name="cat_general">General</string>
+	<string name="cat_network">Network</string>
+	<string name="cat_stealth">Stealth</string>
+	<string name="stealth_low">Low</string>
+	<string name="stealth_med">Medium</string>
+	<string name="stealth_high">High</string>
+	<string name="net_server_addr">Edit server address</string>
+	<string name="net_allow">Send data to Server</string>
+	<string name="pref_data_off">Enable data collection</string>
+	<string name="pref_clear_data">Clears all collected user information</string>
+
+
+	<string name="stealth_descr">Change how transparently SpyDroid attempts to
+		collect user data.</string>
+	<string name="net_serv_descr">Enter the web address of the server to receive
+		SpyDroid\'s
+		data for this device</string>
+	<string name="collect_descr">Edit what kind of information SpyDroid can collect
+	</string>
+	<string name="net_allow_descr">Allow SpyDroid to send user information to a remote
+		server</string>
+	<string name="menu_pref">Settings</string>
+	<string name="menu_info">Info</string>
+	<string name="collect_types">Manage collection types</string>
+	<string name="net_diag_title">Remote server address</string>
+	<string name="stealth_edit">Change stealth mode</string>
+	<string name="info_title">About SpyDroid</string>
+	<string name="info_descr"><b>Version: .1</b>\nSpyDroid is an open source Android application developed as a white-hat test case for mobile spyware.
+	 This application is currently under development and will see new features and a better info box shortly. Source code is available online at
+	 \n<a href="http://code.google.com/p/spydroid-duke">http://code.google.com/p/spydroid-duke/</a></string>
+	<string name="info_close">Close</string>
+	<string name="pref_data_on">Disable data collection</string>
+	<string name="clear_data_descr">This action will erase <b>all</b> locally stored SpyDroid data and <b>cannot</b> be undone.</string>
+	<string name="clear_data_button">Clear data</string>
 </resources>
