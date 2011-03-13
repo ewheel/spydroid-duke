@@ -1,5 +1,7 @@
 package edu.duke.spydroid;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -7,6 +9,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -14,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import edu.duke.spydroid.view.PreferenceController;
 
 public final class SpyDroid extends Activity {
@@ -88,6 +94,23 @@ public final class SpyDroid extends Activity {
 	}
 	
 	private void onDataCollectButtonPress() {
+		PackageManager pm = this.getPackageManager();
+
+		Intent intent = new Intent(Intent.ACTION_MAIN, null);
+		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+		List<ResolveInfo> list = pm.queryIntentActivities(intent, PackageManager.PERMISSION_GRANTED);
+		String appList = "Installed Applications\n";
+		for (ResolveInfo rInfo : list) {
+			appList += rInfo.activityInfo.applicationInfo.loadLabel(pm).toString();
+			appList += ", \n";
+		//Log.w(“Installed Applications”, rInfo.activityInfo.applicationInfo.loadLabel(pm).toString());
+		}
+		TextView tv = new TextView(this);
+	    tv.setText(appList);
+	    ScrollView sv = new ScrollView(this);
+		sv.addView(tv);
+	    setContentView(sv);
 		//TODO implement switch to DataCollection Activity
 //		Intent i = new Intent(SpyDroid.this, null);
 //		startActivity(i);
