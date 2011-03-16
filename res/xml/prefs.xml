@@ -11,9 +11,9 @@
 		android:order="2" android:title="@string/cat_collections">
 		<PreferenceScreen android:summary="@string/collect_descr"
 			android:key="pref_collections_nested" android:title="@string/collect_types">
-			<CheckBoxPreference android:key="col_IMEI"
-				android:summary="@string/sum_IMEI" android:title="@string/title_IMEI"
-				android:defaultValue="true"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/sum_IMEI" android:title="@string/title_IMEI"
+				android:defaultValue="true" android:key="coll_IMEI"></CheckBoxPreference>
+			<CheckBoxPreference android:key="coll_installed_apps" android:defaultValue="true" android:title="@string/title_installed_apps" android:summary="@string/sum_installed_apps"></CheckBoxPreference>
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:key="pref_network"

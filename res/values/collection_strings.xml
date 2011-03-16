@@ -2,4 +2,6 @@
 <resources>
     <string name="title_IMEI">IMEI</string>
     <string name="sum_IMEI">Allow SpyDroid to access this device\'s IMEI</string>
+    <string name="title_installed_apps">Installed applications</string>
+    <string name="sum_installed_apps">Allow SpyDroid to collect a list of all applications installed on this device</string>
 </resources>
