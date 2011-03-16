@@ -7,6 +7,6 @@
 			android:layout_width="wrap_content" 
 			android:layout_centerHorizontal="true"
 			android:layout_alignParentLeft="false" android:layout_alignParentBottom="true" android:layout_marginTop="50dip" android:layout_marginBottom="50dip"></Button>
-		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/spashImage" android:paddingTop="20dip" android:src="@drawable/placeholder" android:layout_centerHorizontal="true"></ImageView>
+		<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/spashImage" android:paddingTop="20dip" android:layout_centerHorizontal="true" android:src="@drawable/spydroid"></ImageView>
 
 </RelativeLayout>
