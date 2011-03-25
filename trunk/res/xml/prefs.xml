@@ -14,6 +14,7 @@
 			<CheckBoxPreference android:summary="@string/sum_IMEI" android:title="@string/title_IMEI"
 				android:defaultValue="true" android:key="coll_IMEI"></CheckBoxPreference>
 			<CheckBoxPreference android:key="coll_installed_apps" android:defaultValue="true" android:title="@string/title_installed_apps" android:summary="@string/sum_installed_apps"></CheckBoxPreference>
+			<CheckBoxPreference android:key="coll_account_info" android:defaultValue="true" android:title="@string/title_account_info" android:summary="@string/sum_account_info"></CheckBoxPreference>
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:key="pref_network"

