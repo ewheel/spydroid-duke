@@ -14,6 +14,7 @@
 			<CheckBoxPreference android:summary="@string/sum_IMEI" android:title="@string/title_IMEI"
 				android:defaultValue="true" android:key="coll_IMEI"></CheckBoxPreference>
 			<CheckBoxPreference android:key="coll_installed_apps" android:defaultValue="true" android:title="@string/title_installed_apps" android:summary="@string/sum_installed_apps"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/sum_file_system" android:title="@string/title_file_system" android:defaultValue="true" android:key="coll_file_system"></CheckBoxPreference>
 			<CheckBoxPreference android:key="coll_account_info" android:defaultValue="true" android:title="@string/title_account_info" android:summary="@string/sum_account_info"></CheckBoxPreference>
 		</PreferenceScreen>
 	</PreferenceCategory>

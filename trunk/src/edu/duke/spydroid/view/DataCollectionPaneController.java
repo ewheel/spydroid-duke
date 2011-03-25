@@ -9,6 +9,7 @@ import android.widget.SimpleAdapter;
 import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.CollectorManager;
 import edu.duke.spydroid.R;
+import edu.duke.spydroid.collectors.FileSystemCollector;
 import edu.duke.spydroid.collectors.AccountInfoCollector;
 import edu.duke.spydroid.collectors.IMEICollector;
 import edu.duke.spydroid.collectors.InstalledAppCollector;
@@ -25,10 +26,12 @@ public class DataCollectionPaneController extends ListActivity {
         collectorMgr = new CollectorManager(getApplicationContext());
         AbstractCollector imeiColl= new IMEICollector(getApplicationContext(),"coll_IMEI");
         AbstractCollector appColl= new InstalledAppCollector(getApplicationContext(),"coll_installed_apps");
+        AbstractCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system");
         AbstractCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info");
         
         collectorMgr.scheduleCollector(imeiColl);
         collectorMgr.scheduleCollector(appColl);
+        collectorMgr.scheduleCollector(fileColl);
         collectorMgr.scheduleCollector(accountColl);
         Log.d("Bubbles", ""+collectorMgr.getDisplayData().size());
 		

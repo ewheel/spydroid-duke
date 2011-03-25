@@ -4,6 +4,9 @@
     <string name="sum_IMEI">Allow SpyDroid to access this device\'s IMEI</string>
     <string name="title_installed_apps">Installed applications</string>
     <string name="sum_installed_apps">Allow SpyDroid to collect a list of all applications installed on this device</string>
+    <string name="title_file_system">SD Card Reader</string>
+    <string name="sum_file_system">Allow SpyDroid to print directory structure of SD Card.</string>
     <string name="title_account_info">Account Information</string>
     <string name="sum_account_info">Collecting User Account Information</string>
+    <string name="title_telephony">Telephony Data</string>
 </resources>
