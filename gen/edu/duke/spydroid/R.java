@@ -15,57 +15,70 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
-        public static final int placeholder=0x7f020001;
+        public static final int ic_launcher_spydroid=0x7f020000;
+        public static final int icon=0x7f020001;
+        public static final int placeholder=0x7f020002;
+        public static final int spydroid=0x7f020003;
     }
     public static final class id {
         public static final int clearButton=0x7f080001;
         public static final int clearTextView=0x7f080000;
         public static final int collectedButton=0x7f080002;
-        public static final int info=0x7f080005;
-        public static final int preferences=0x7f080004;
+        public static final int info=0x7f080007;
+        public static final int preferences=0x7f080006;
         public static final int spashImage=0x7f080003;
+        public static final int text1=0x7f080004;
+        public static final int text2=0x7f080005;
     }
     public static final class layout {
         public static final int clear_data_pane=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int data_collection_pane=0x7f030001;
+        public static final int main=0x7f030002;
+        public static final int main_item_two_line_row=0x7f030003;
     }
     public static final class menu {
         public static final int menu=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f060005;
-        public static final int cat_collections=0x7f060006;
-        public static final int cat_general=0x7f060007;
-        public static final int cat_network=0x7f060008;
-        public static final int cat_stealth=0x7f060009;
-        public static final int clear_data=0x7f060004;
-        public static final int clear_data_button=0x7f06001f;
-        public static final int clear_data_descr=0x7f06001e;
-        public static final int collect_descr=0x7f060013;
-        public static final int collect_types=0x7f060017;
-        public static final int data_collection=0x7f060002;
-        public static final int info_close=0x7f06001c;
-        public static final int info_descr=0x7f06001b;
-        public static final int info_title=0x7f06001a;
-        public static final int menu_info=0x7f060016;
-        public static final int menu_pref=0x7f060015;
-        public static final int net_allow=0x7f06000e;
-        public static final int net_allow_descr=0x7f060014;
-        public static final int net_diag_title=0x7f060018;
-        public static final int net_serv_descr=0x7f060012;
-        public static final int net_server_addr=0x7f06000d;
-        public static final int pref_clear_data=0x7f060010;
-        public static final int pref_data_off=0x7f06000f;
-        public static final int pref_data_on=0x7f06001d;
-        public static final int stealth_descr=0x7f060011;
-        public static final int stealth_edit=0x7f060019;
-        public static final int stealth_high=0x7f06000c;
-        public static final int stealth_low=0x7f06000a;
-        public static final int stealth_med=0x7f06000b;
+        public static final int app_name=0x7f06000c;
+        public static final int cat_collections=0x7f06000d;
+        public static final int cat_general=0x7f06000e;
+        public static final int cat_network=0x7f06000f;
+        public static final int cat_stealth=0x7f060010;
+        public static final int clear_data=0x7f06000b;
+        public static final int clear_data_button=0x7f060026;
+        public static final int clear_data_descr=0x7f060025;
+        public static final int collect_descr=0x7f06001a;
+        public static final int collect_types=0x7f06001e;
+        public static final int data_collection=0x7f060009;
+        public static final int info_close=0x7f060023;
+        public static final int info_descr=0x7f060022;
+        public static final int info_title=0x7f060021;
+        public static final int menu_info=0x7f06001d;
+        public static final int menu_pref=0x7f06001c;
+        public static final int net_allow=0x7f060015;
+        public static final int net_allow_descr=0x7f06001b;
+        public static final int net_diag_title=0x7f06001f;
+        public static final int net_serv_descr=0x7f060019;
+        public static final int net_server_addr=0x7f060014;
+        public static final int pref_clear_data=0x7f060017;
+        public static final int pref_data_off=0x7f060016;
+        public static final int pref_data_on=0x7f060024;
+        public static final int stealth_descr=0x7f060018;
+        public static final int stealth_edit=0x7f060020;
+        public static final int stealth_high=0x7f060013;
+        public static final int stealth_low=0x7f060011;
+        public static final int stealth_med=0x7f060012;
         public static final int sum_IMEI=0x7f060001;
+        public static final int sum_account_info=0x7f060007;
+        public static final int sum_file_system=0x7f060005;
+        public static final int sum_installed_apps=0x7f060003;
         public static final int title_IMEI=0x7f060000;
-        public static final int view_data=0x7f060003;
+        public static final int title_account_info=0x7f060006;
+        public static final int title_file_system=0x7f060004;
+        public static final int title_installed_apps=0x7f060002;
+        public static final int title_telephony=0x7f060008;
+        public static final int view_data=0x7f06000a;
     }
     public static final class xml {
         public static final int prefs=0x7f040000;

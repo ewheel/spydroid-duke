@@ -1,5 +1,6 @@
 package edu.duke.spydroid;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -93,4 +94,5 @@ public final class SpyDroid extends Activity {
 		Intent i = new Intent(SpyDroid.this, DataCollectionPaneController.class);
 		startActivity(i);
 	}
-}
+	
+	}

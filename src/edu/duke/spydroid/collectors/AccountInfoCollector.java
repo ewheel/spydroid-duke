@@ -6,8 +6,6 @@ import java.util.Map;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
-import android.content.pm.ResolveInfo;
-import android.telephony.TelephonyManager;
 
 import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.R;
