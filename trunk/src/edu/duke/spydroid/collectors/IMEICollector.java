@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telephony.TelephonyManager;
 import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.R;
@@ -31,15 +32,19 @@ public class IMEICollector extends AbstractCollector {
 
 	@Override
 	protected void onStart() {
-		TelephonyManager tm = (TelephonyManager)getContext().getSystemService(Context.TELEPHONY_SERVICE);
-		IMEIData=tm.getDeviceId();
-		setChanged();
-		notifyObservers(IMEIData);
+		collect(null);
 	}
 
 	@Override
 	protected void onStop() {
 		// No cleanup required
+	}
+
+	@Override
+	protected boolean onCollect(Intent intent) {
+		TelephonyManager tm = (TelephonyManager)getContext().getSystemService(Context.TELEPHONY_SERVICE);
+		IMEIData=tm.getDeviceId();
+		return true;
 	}
 
 }

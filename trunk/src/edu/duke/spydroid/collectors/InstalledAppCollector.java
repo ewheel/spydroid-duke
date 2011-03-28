@@ -34,13 +34,23 @@ public class InstalledAppCollector extends AbstractCollector {
 
 	@Override
 	protected void onStart() {
+		collect(null);
 		
+	}
+
+	@Override
+	protected void onStop() {
+		// No cleanup required so not implemented. 
+	}
+
+	@Override
+	protected boolean onCollect(Intent intent) {
 		PackageManager pm = getContext().getPackageManager();
 
-		Intent intent = new Intent(Intent.ACTION_MAIN, null);
-		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		Intent queryIntent = new Intent(Intent.ACTION_MAIN, null);
+		queryIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 
-		List<ResolveInfo> list = pm.queryIntentActivities(intent, PackageManager.PERMISSION_GRANTED);
+		List<ResolveInfo> list = pm.queryIntentActivities(queryIntent, PackageManager.PERMISSION_GRANTED);
 		StringBuilder appList = new StringBuilder();
 		for (ResolveInfo rInfo : list) {
 			appList.append(rInfo.activityInfo.applicationInfo.loadLabel(pm).toString());
@@ -48,13 +58,8 @@ public class InstalledAppCollector extends AbstractCollector {
 		}
 		appList.delete(appList.length()-2, appList.length());
 		installedApps=appList.toString();
-		setChanged();
-		notifyObservers(installedApps);
-	}
-
-	@Override
-	protected void onStop() {
-		// No cleanup required so not implemented. 
+		return true;
+		
 	}
 
 }
