@@ -32,11 +32,12 @@
 	<string name="net_diag_title">Remote server address</string>
 	<string name="stealth_edit">Change stealth mode</string>
 	<string name="info_title">About SpyDroid</string>
-	<string name="info_descr"><b>Version: .1</b>\nSpyDroid is an open source Android application developed as a white-hat test case for mobile spyware.
+	<string name="info_descr"><b>Version: .3</b>\nSpyDroid is an open source Android application developed as a white-hat test case for mobile spyware.
 	 This application is currently under development and will see new features and a better info box shortly. Source code is available online at
 	 \n<a href="http://code.google.com/p/spydroid-duke">http://code.google.com/p/spydroid-duke/</a></string>
 	<string name="info_close">Close</string>
 	<string name="pref_data_on">Disable data collection</string>
 	<string name="clear_data_descr">This action will erase <b>all</b> locally stored SpyDroid data and <b>cannot</b> be undone.</string>
 	<string name="clear_data_button">Clear data</string>
+	<string name="coll_service_label">Collector Service</string>
 </resources>
