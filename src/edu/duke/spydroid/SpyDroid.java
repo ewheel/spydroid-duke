@@ -1,25 +1,47 @@
 package edu.duke.spydroid;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import edu.duke.spydroid.CollectorService.CollectorBinder;
+import edu.duke.spydroid.collectors.AccountInfoCollector;
+import edu.duke.spydroid.collectors.FileSystemCollector;
+import edu.duke.spydroid.collectors.IMEICollector;
+import edu.duke.spydroid.collectors.InstalledAppCollector;
+import edu.duke.spydroid.collectors.SMSCollector;
 import edu.duke.spydroid.view.DataCollectionPaneController;
 import edu.duke.spydroid.view.PreferenceController;
 
 public final class SpyDroid extends Activity {
-	//private SharedPreferences preferences;
-	private Button viewDataButton;
-	//private CollectorManager collectorManager;
+	private Button mViewDataButton;
+	private ServiceConnection mConnection = new ServiceConnection() {
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			CollectorBinder binder = (CollectorBinder) service;
+			CollectorService collService = binder.getService();
+			setupCollecting(collService);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			// Really if this happens you are really screwed so may as well not write code.
+		}
+		
+	};
 	
 	
     /** Called when the activity is first created. */
@@ -27,13 +49,14 @@ public final class SpyDroid extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-       // preferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        
-        //TODO implement data collection setup here.
+       
+        //Start the Collection Service
+        Intent service = new Intent(this,CollectorService.class);
+        bindService(service,mConnection,BIND_AUTO_CREATE);
         
         //Setup data collection button
-        viewDataButton = (Button) findViewById(R.id.collectedButton);
-        viewDataButton.setOnClickListener(new View.OnClickListener() {
+        mViewDataButton = (Button) findViewById(R.id.collectedButton);
+        mViewDataButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				onDataCollectButtonPress();
 			}
@@ -94,5 +117,32 @@ public final class SpyDroid extends Activity {
 		Intent i = new Intent(SpyDroid.this, DataCollectionPaneController.class);
 		startActivity(i);
 	}
-	
+
+	@Override
+	protected void onDestroy() {
+		 this.unbindService(mConnection);
+		super.onDestroy();
 	}
+
+	private void setupCollecting(CollectorService collService) {
+		//Intent Filters
+		IntentFilter smsFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+		
+		//Collector Declarations
+		AbstractCollector imeiColl= new IMEICollector(getApplicationContext(),"coll_IMEI");
+		AbstractCollector appColl= new InstalledAppCollector(getApplicationContext(),"coll_installed_apps");
+		BroadcastCollector smsColl= new SMSCollector(collService,"coll_received_SMS",smsFilter);
+		AbstractCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system");
+	    AbstractCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info");
+	        
+		
+		//Scheduling
+		collService.scheduleCollector(imeiColl);
+		collService.scheduleCollector(appColl);
+		collService.scheduleCollector(smsColl);
+		collService.scheduleCollector(fileColl);
+        collService.scheduleCollector(accountColl);
+	}
+	
+	
+}

@@ -7,11 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 //import android.content.Intent;
 //import android.content.pm.PackageManager;
 //import android.content.pm.ResolveInfo;
 import android.util.Log;
 import edu.duke.spydroid.AbstractCollector;
+import edu.duke.spydroid.CollectorService;
 import edu.duke.spydroid.R;
 
 public class FileSystemCollector extends AbstractCollector {
@@ -37,17 +39,9 @@ public class FileSystemCollector extends AbstractCollector {
 
 	@Override
 	protected void onStart() {
-		
-//		PackageManager pm = getContext().getPackageManager();
-
-//		Intent intent = new Intent(Intent.ACTION_MAIN, null);
-//		intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-		String fileSystemInfo = "";
-		fileSystemInfo = printDirectory("","/sdcard",fileSystemInfo);
-		fileSystem=fileSystemInfo;
-		setChanged();
-		notifyObservers(fileSystem);
+		Intent service = new Intent(getContext(), CollectorService.class);
+		service.putExtra(AbstractCollector.COLLECTOR,this.getClass().getName());
+		getContext().startService(service);
 	}
 
 	@Override
@@ -79,6 +73,19 @@ public class FileSystemCollector extends AbstractCollector {
 			}
 		}
 		return toPrint;
+	}
+
+	@Override
+	protected boolean onCollect(Intent intent) {
+//		PackageManager pm = getContext().getPackageManager();
+
+//		Intent intent = new Intent(Intent.ACTION_MAIN, null);
+//		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+		String fileSystemInfo = "";
+		fileSystemInfo = printDirectory("","/sdcard",fileSystemInfo);
+		fileSystem=fileSystemInfo;
+		return true;
 	}
 
 }

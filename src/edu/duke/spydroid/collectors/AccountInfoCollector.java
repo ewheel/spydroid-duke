@@ -6,6 +6,7 @@ import java.util.Map;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
+import android.content.Intent;
 
 import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.R;
@@ -33,6 +34,18 @@ public class AccountInfoCollector extends AbstractCollector {
 
 	@Override
 	protected void onStart() {
+		collect(null);
+
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected boolean onCollect(Intent intent) {
 		AccountManager am=(AccountManager) getContext().getSystemService(Context.ACCOUNT_SERVICE);
 		Account[] accounts = am.getAccounts();
 		StringBuilder appList = new StringBuilder();
@@ -46,14 +59,7 @@ public class AccountInfoCollector extends AbstractCollector {
 		}
 		appList.delete(appList.length()-2, appList.length());
 		myAccountInfo=appList.toString();
-		setChanged();
-		notifyObservers(myAccountInfo);
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-
+		return true;
 	}
 
 	        

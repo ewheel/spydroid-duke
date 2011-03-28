@@ -1,57 +1,61 @@
 package edu.duke.spydroid.view;
 
 import android.app.ListActivity;
-import android.content.SharedPreferences;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
+import android.os.IBinder;
 import android.widget.SimpleAdapter;
 import edu.duke.spydroid.AbstractCollector;
-import edu.duke.spydroid.CollectorManager;
+import edu.duke.spydroid.CollectorService;
+import edu.duke.spydroid.CollectorService.CollectorBinder;
 import edu.duke.spydroid.R;
-import edu.duke.spydroid.collectors.FileSystemCollector;
-import edu.duke.spydroid.collectors.AccountInfoCollector;
-import edu.duke.spydroid.collectors.IMEICollector;
-import edu.duke.spydroid.collectors.InstalledAppCollector;
 
 public class DataCollectionPaneController extends ListActivity {
-	private CollectorManager collectorMgr;
+	private SimpleAdapter mAdapter;
+	private CollectorService mService;
+	private boolean mServiceBound;
+	private ServiceConnection mConnection = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mServiceBound = true;
+			CollectorBinder binder = (CollectorBinder) service;
+			mService=binder.getService(); 
+			bindViewData();
+		}
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			// If this happens, you have bigger problems.
+			mServiceBound = false;
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.data_collection_pane);
 		
-		//Schedule Collections
-        collectorMgr = new CollectorManager(getApplicationContext());
-        AbstractCollector imeiColl= new IMEICollector(getApplicationContext(),"coll_IMEI");
-        AbstractCollector appColl= new InstalledAppCollector(getApplicationContext(),"coll_installed_apps");
-        AbstractCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system");
-        AbstractCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info");
-        
-        collectorMgr.scheduleCollector(imeiColl);
-        collectorMgr.scheduleCollector(appColl);
-        collectorMgr.scheduleCollector(fileColl);
-        collectorMgr.scheduleCollector(accountColl);
-        Log.d("Bubbles", ""+collectorMgr.getDisplayData().size());
-		
-		//Bind Data to View
-		String [] from ={AbstractCollector.TITLE_KEY, AbstractCollector.CONTENT_KEY};
-		int [] to = {android.R.id.text1, android.R.id.text2 };
-		SimpleAdapter adapter = new SimpleAdapter(this, collectorMgr.getDisplayData(),android.R.layout.two_line_list_item, from, to);
-		setListAdapter(adapter);
-		
-		//Debug
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-		Log.d("Bubbles", ""+sharedPrefs.getBoolean("coll_installed_apps", false));
+		//Bind Service
+		Intent service = new Intent(this,CollectorService.class);
+		this.bindService(service, mConnection, BIND_AUTO_CREATE);
 	}
 
 	@Override
-	protected void onResume() {
-		//So apparently Android, just calls onCreate constantly, making this potentially obsolete....
-		super.onResume();
-		
-		
+	protected void onStart() {
+		super.onStart();
+		if(mAdapter!=null)
+			mAdapter.notifyDataSetChanged();//Update when the screen becomes visible.
 	}
 
+	private void bindViewData() {
+		if(mServiceBound) {
+			String [] from ={AbstractCollector.TITLE_KEY, AbstractCollector.CONTENT_KEY};
+			int [] to = {android.R.id.text1, android.R.id.text2 };
+			mAdapter = new SimpleAdapter(this, mService.getDisplayData(),android.R.layout.two_line_list_item, from, to);
+			setListAdapter(mAdapter);
+			mServiceBound = false;
+			unbindService(mConnection);	
+		}
+	}
 }
