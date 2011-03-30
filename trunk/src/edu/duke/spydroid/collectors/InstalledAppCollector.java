@@ -1,46 +1,22 @@
 package edu.duke.spydroid.collectors;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.R;
+import edu.duke.spydroid.StaticCollector;
 
-public class InstalledAppCollector extends AbstractCollector {
-	private String installedApps;
+public class InstalledAppCollector extends StaticCollector {
 
-	public InstalledAppCollector(Context ctxt, String preferenceKey) {
-		super(ctxt, preferenceKey);
-	}
 
-	@Override
-	public Object getData() {
-		return installedApps;
-	}
-
-	@Override
-	public Map<String, ?> getDisplayableData() {
-		Map<String,String> displayMap=new HashMap<String,String>();
-		String value=getContext().getString(R.string.title_installed_apps);
-		displayMap.put(AbstractCollector.TITLE_KEY, value);
-		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
-		return displayMap;
-	}
-
-	@Override
-	protected void onStart() {
-		collect(null);
-		
-	}
-
-	@Override
-	protected void onStop() {
-		// No cleanup required so not implemented. 
+	public InstalledAppCollector(Context ctxt, String preferenceKey,
+			Service service) {
+		super(ctxt, preferenceKey, service);
+		setDisplayTitle(R.string.title_installed_apps);
 	}
 
 	@Override
@@ -57,7 +33,7 @@ public class InstalledAppCollector extends AbstractCollector {
 			appList.append(", ");
 		}
 		appList.delete(appList.length()-2, appList.length());
-		installedApps=appList.toString();
+		setData(appList.toString());
 		return true;
 		
 	}
