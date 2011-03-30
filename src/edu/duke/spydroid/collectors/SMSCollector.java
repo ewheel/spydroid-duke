@@ -1,38 +1,22 @@
 package edu.duke.spydroid.collectors;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.BroadcastCollector;
 import edu.duke.spydroid.R;
 
 public class SMSCollector extends BroadcastCollector {
-	private String mMessageData;
 
 	public SMSCollector(Context ctxt, String preferenceKey, IntentFilter filter) {
 		super(ctxt, preferenceKey, filter);
+		setDisplayTitle(R.string.title_received_SMS);
 	}
 
-	@Override
-	public Object getData() {
-		return mMessageData;
-	}
-
-	@Override
-	public Map<String, ?> getDisplayableData() {
-		Map<String,String> displayMap=new HashMap<String,String>();
-		String value=getContext().getString(R.string.title_received_SMS);
-		displayMap.put(AbstractCollector.TITLE_KEY, value);
-		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
-		return displayMap;
-	}
 
 
 
@@ -42,7 +26,7 @@ public class SMSCollector extends BroadcastCollector {
 		String action=intent.getAction();
 		while(filterActions.hasNext()) {
 			if(filterActions.next().equals(action)) {
-				mMessageData=processTextMessage(intent);
+				setData(processTextMessage(intent));
 				return true;
 			}
 		}

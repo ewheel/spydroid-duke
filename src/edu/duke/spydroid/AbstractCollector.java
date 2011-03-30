@@ -1,5 +1,6 @@
 package edu.duke.spydroid;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
@@ -15,6 +16,8 @@ public abstract class AbstractCollector extends Observable {
 	private String prefKey;
 	private Context appContext;
 	private boolean isCollecting;
+	private Object mData;
+	private String mDisplayCategory;
 
 	public AbstractCollector(Context ctxt, String preferenceKey) {
 		prefKey = preferenceKey;
@@ -40,11 +43,49 @@ public abstract class AbstractCollector extends Observable {
 	}
 
 	/**
-	 * Gives access to the currently available collected data.
+	 * Gives access to the currently available collected data.Subclasses may
+	 * override this class if special bookkeeping is needed on data access. This
+	 * data value is normally set with calls to setValue.
 	 * 
 	 * @return The collected data, or null if no data has been collected.
 	 */
-	public abstract Object getData();
+	public Object getData() {
+		return mData;
+	}
+
+	/**
+	 * Called by subclasses to set the data object returned by this class's
+	 * <code>getData</code> method.
+	 * 
+	 * @param o
+	 *            The collected data.
+	 */
+	protected void setData(Object o) {
+		mData = o;
+	}
+
+	/**
+	 * Sets the heading or category title for displayed data associated with
+	 * this Collector.
+	 * 
+	 * @param category
+	 *            A string representing the display category
+	 */
+	protected void setDisplayTitle(String category) {
+		mDisplayCategory = category;
+	}
+
+	/**
+	 * Sets the heading or category title for displayed data associated with
+	 * this Collector.
+	 * 
+	 * @param category
+	 *            An id pointing to a string resource that represents the
+	 *            display category
+	 */
+	protected void setDisplayTitle(int id) {
+		mDisplayCategory = getContext().getString(id);
+	}
 
 	/**
 	 * Returns the collected data in some displayable format, such that data is
@@ -56,7 +97,12 @@ public abstract class AbstractCollector extends Observable {
 	 * 
 	 * @return A <code>Map</code> between display categories and formatted data.
 	 */
-	public abstract Map<String, ?> getDisplayableData();
+	public Map<String, ?> getDisplayableData() {
+		Map<String,String> displayMap=new HashMap<String,String>();
+		displayMap.put(AbstractCollector.TITLE_KEY, mDisplayCategory);
+		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
+		return displayMap;
+	}
 
 	/**
 	 * Provides access a <code>Context</code> in order to facilitate

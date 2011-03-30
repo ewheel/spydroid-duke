@@ -1,47 +1,20 @@
 package edu.duke.spydroid.collectors;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-
-import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.R;
+import edu.duke.spydroid.StaticCollector;
 
-public class AccountInfoCollector extends AbstractCollector {
-	private String myAccountInfo;
+public class AccountInfoCollector extends StaticCollector {
 
-	public AccountInfoCollector(Context ctxt, String preferenceKey) {
-		super(ctxt, preferenceKey);
-	}
 
-	@Override
-	public Object getData() {
-		return myAccountInfo;
-	}
-
-	@Override
-	public Map<String, ?> getDisplayableData() {
-		Map<String,String> displayMap=new HashMap<String,String>();
-		String value=getContext().getString(R.string.title_account_info);
-		displayMap.put(AbstractCollector.TITLE_KEY, value);
-		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
-		return displayMap;
-	}
-
-	@Override
-	protected void onStart() {
-		collect(null);
-
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-
+	public AccountInfoCollector(Context ctxt, String preferenceKey,
+			Service service) {
+		super(ctxt, preferenceKey, service);
+		setDisplayTitle(R.string.title_account_info);
 	}
 
 	@Override
@@ -58,7 +31,7 @@ public class AccountInfoCollector extends AbstractCollector {
 			appList.append(", ");
 		}
 		appList.delete(appList.length()-2, appList.length());
-		myAccountInfo=appList.toString();
+		setData(appList);
 		return true;
 	}
 

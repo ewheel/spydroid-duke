@@ -1,49 +1,23 @@
 package edu.duke.spydroid.collectors;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
-import edu.duke.spydroid.AbstractCollector;
 import edu.duke.spydroid.R;
+import edu.duke.spydroid.StaticCollector;
 
-public class IMEICollector extends AbstractCollector {
-	private String IMEIData;
+public class IMEICollector extends StaticCollector {
 
-	public IMEICollector(Context ctxt, String preferenceKey) {
-		super(ctxt, preferenceKey);
-	}
-
-	@Override
-	public Object getData() {
-		return IMEIData;
-	}
-
-	@Override
-	public Map<String, ?> getDisplayableData() {
-		Map<String,String> displayMap=new HashMap<String,String>();
-		String value=getContext().getString(R.string.title_IMEI);
-		displayMap.put(AbstractCollector.TITLE_KEY, value);
-		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
-		return displayMap;
-	}
-
-	@Override
-	protected void onStart() {
-		collect(null);
-	}
-
-	@Override
-	protected void onStop() {
-		// No cleanup required
+	public IMEICollector(Context ctxt, String preferenceKey, Service service) {
+		super(ctxt, preferenceKey, service);
+		setDisplayTitle(R.string.title_IMEI);
 	}
 
 	@Override
 	protected boolean onCollect(Intent intent) {
 		TelephonyManager tm = (TelephonyManager)getContext().getSystemService(Context.TELEPHONY_SERVICE);
-		IMEIData=tm.getDeviceId();
+		setData(tm.getDeviceId());
 		return true;
 	}
 
