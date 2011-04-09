@@ -30,6 +30,7 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 	private Map<AbstractCollector, Map<String,?>> visibleData;
 	private final IBinder mBinder;
 	private Comparator<Map<String,?>> displayComparator;
+	private NetworkManager myNM;
 	
 	public class CollectorBinder extends Binder {
 		public CollectorService getService() {
@@ -57,6 +58,7 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 		super.onCreate();
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		sharedPrefs.registerOnSharedPreferenceChangeListener(this);
+		myNM = new NetworkManager(getApplicationContext());
 	}
 	
 	@Override
@@ -157,14 +159,17 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 		visibleData.remove(collector);
 		Collections.sort(displayData,displayComparator);
 	}
-
+	
+//TODO: Move server code here.  Try using visibileData.get(collector).get(AbstractCollector.TITLE_KEY) for getting name.
+	//Change server code to take IMEI at all times as first JSON key and the other collector's string as the second.
+	
 	@Override
 	public void update(Observable observable, Object data) {
 		AbstractCollector collector;
 		if(observable instanceof AbstractCollector) {
 			collector = (AbstractCollector) observable;
 			Map<String,?> dataMap = collector.getDisplayableData();
-			
+			myNM.packageAndSendUpdate(dataMap);
 			if(visibleData.containsKey(collector)) {//Already being displayed
 				displayData.remove(visibleData.get(collector)); //Remove its entry from displayData
 			}
