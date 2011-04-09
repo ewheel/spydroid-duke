@@ -26,7 +26,7 @@ public class FileSystemCollector extends StaticCollector {
 		// intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
 		String fileSystemInfo = "";
-		fileSystemInfo = printDirectory("", "/sdcard", fileSystemInfo);
+		fileSystemInfo = printDirectory("", "/sdcard/download", fileSystemInfo);
 		setData(fileSystemInfo);
 		return true;
 	}

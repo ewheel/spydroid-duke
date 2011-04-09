@@ -17,13 +17,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class NetworkManager {
 
 	private String myUID;
-	private Context myContext;
+	private static Context myContext;
 	private static DefaultHttpClient httpClient = null;
 	private static final int REGISTRATION_TIMEOUT = 30 * 1000; // ms
 	
@@ -40,7 +42,9 @@ public class NetworkManager {
     public static String sendToServer( String request ) throws IOException {
         String result = null;
         maybeCreateHttpClient();
-        HttpPost post = new HttpPost( "http://barko.zapto.org:8080" ); //Config.APP_BASE_URI
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(myContext);
+        String serverLocation = sPref.getString("pref_edit_server_addr", "http://barko.zapto.org:8080");
+        HttpPost post = new HttpPost(serverLocation);
         post.addHeader( "Content-Type", "text/vnd.aexp.json.req" );
         post.setEntity( new StringEntity( request ) );    
         HttpResponse resp = httpClient.execute( post );

