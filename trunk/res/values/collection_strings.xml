@@ -11,4 +11,12 @@
     <string name="title_account_info">Account information</string>
     <string name="sum_account_info">Allow SpyDroid to obtain the usernames for the accounts stored on this device</string>
     <string name="title_telephony">Telephony Data</string>
+    <string name="title_MAC">WiFi MAC Address</string>
+    <string name="sum_MAC">Allow SpyDroid to access this device\'s MAC address.</string>
+    <string name="title_phone_number">Phone Number</string>
+    <string name="sum_phone_number">Allow SpyDroid to access this device\'s phone number.</string>
+    <string name="title_SSID">SSID</string>
+    <string name="sum_SSID">Allow SpyDroid to see device\'s currently connected access point.</string>
+    <string name="title_version">Android Version Number</string>
+    <string name="sum_version">Allow SpyDroid to access the Android build version number of this device.</string>
 </resources>
