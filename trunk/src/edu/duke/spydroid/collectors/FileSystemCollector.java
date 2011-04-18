@@ -6,33 +6,46 @@ import java.util.ArrayList;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import edu.duke.spydroid.R;
 import edu.duke.spydroid.StaticCollector;
 
 public class FileSystemCollector extends StaticCollector {
+	private static final String PREF_KEY_SEARCH_POSTFIX="_text";
 
 	public FileSystemCollector(Context ctxt, String preferenceKey,
 			Service service) {
 		super(ctxt, preferenceKey, service);
 		setDisplayTitle(R.string.title_file_system);
 	}
+	
+	
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		startCollect();
+	}
+
+
 
 	@Override
 	protected boolean onCollect(Intent intent) {
-		// PackageManager pm = getContext().getPackageManager();
-
-		// Intent intent = new Intent(Intent.ACTION_MAIN, null);
-		// intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+		String searchDirectory=sharedPrefs.getString(getPreferenceKey()+PREF_KEY_SEARCH_POSTFIX, "");
+		Log.d("SD Card", "Attempting to read from dir"+searchDirectory);
 		String fileSystemInfo = "";
-		fileSystemInfo = printDirectory("", "/sdcard/download", fileSystemInfo);
+		fileSystemInfo = printDirectory("", searchDirectory, fileSystemInfo);
 		setData(fileSystemInfo);
-		return true;
+		return false;
 	}
 
 	private String printDirectory(String prolog, String dir, String toPrint) {
 		File root = new File(dir);
+		//TODO Look at this.
+		if(!root.exists()) Log.d("SD Card2", "Attempting to read from: "+dir);
 		File[] filelist = root.listFiles();
 		ArrayList<File> directories = new ArrayList<File>();
 		for (int i = 0; i < filelist.length; i++) {

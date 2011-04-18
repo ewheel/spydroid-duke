@@ -6,8 +6,11 @@ import java.util.Observable;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 
-public abstract class AbstractCollector extends Observable {
+public abstract class AbstractCollector extends Observable implements
+		OnSharedPreferenceChangeListener {
 	public static final String TITLE_KEY = "title";
 	public static final String CONTENT_KEY = "content";
 	public static final String COLLECTOR = "edu.duke.spydroid.Collector";
@@ -98,7 +101,7 @@ public abstract class AbstractCollector extends Observable {
 	 * @return A <code>Map</code> between display categories and formatted data.
 	 */
 	public Map<String, ?> getDisplayableData() {
-		Map<String,String> displayMap=new HashMap<String,String>();
+		Map<String, String> displayMap = new HashMap<String, String>();
 		displayMap.put(AbstractCollector.TITLE_KEY, mDisplayCategory);
 		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
 		return displayMap;
@@ -194,5 +197,14 @@ public abstract class AbstractCollector extends Observable {
 	 * @return true if new data was collected, false otherwise.
 	 */
 	protected abstract boolean onCollect(Intent intent);
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		// Override this method to be notified of SharedPreferenceChanges,
+		// in particular for changes to values associated with key
+		// this.getPreferenceKey();
+
+	}
 
 }
