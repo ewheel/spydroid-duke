@@ -19,8 +19,9 @@
 			<CheckBoxPreference android:summary="@string/sum_MAC" android:title="@string/title_MAC" android:defaultValue="true" android:key="coll_MAC"></CheckBoxPreference>
 			<CheckBoxPreference android:key="coll_installed_apps" android:defaultValue="true" android:title="@string/title_installed_apps" android:summary="@string/sum_installed_apps"></CheckBoxPreference>
 			<CheckBoxPreference android:title="@string/title_received_SMS" android:key="coll_received_SMS" android:summary="@string/sum_received_SMS" android:defaultValue="true"></CheckBoxPreference>
-		<CheckBoxPreference android:summary="@string/sum_file_system" android:title="@string/title_file_system" android:defaultValue="true" android:key="coll_file_system"></CheckBoxPreference>
-			<CheckBoxPreference android:key="coll_account_info" android:defaultValue="true" android:title="@string/title_account_info" android:summary="@string/sum_account_info"></CheckBoxPreference>
+		<CheckBoxPreference android:summary="@string/sum_file_system" android:title="@string/title_file_system" android:key="coll_file_system" android:defaultValue="false"></CheckBoxPreference>
+			<EditTextPreference android:dialogMessage="@string/coll_file_system_dialog_desc" android:dialogTitle="@string/coll_file_system_dialog_title" android:title="@string/coll_file_system_textPref" android:defaultValue="@string/coll_file_system_default" android:key="coll_file_system_text"></EditTextPreference><CheckBoxPreference android:key="coll_account_info" android:defaultValue="true" android:title="@string/title_account_info" android:summary="@string/sum_account_info"></CheckBoxPreference>
+			
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:key="pref_network"

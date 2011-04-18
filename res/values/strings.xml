@@ -40,4 +40,13 @@
 	<string name="clear_data_descr">This action will erase <b>all</b> locally stored SpyDroid data and <b>cannot</b> be undone.</string>
 	<string name="clear_data_button">Clear data</string>
 	<string name="coll_service_label">Collector Service</string>
+	<string name="coll_file_system_dialog_title">Search Directory</string>
+	<string name="coll_file_system_dialog_desc">Set a directory for SpyDroid to crawl.</string>
+	<string name="coll_file_system_textPref">Set SD card search root</string>
+	<string name="coll_file_system_default">/sdcard/download</string>
+	<string name="coll_file_system_error_title_read">Cannot access directory</string>
+	<string name="coll_file_system_error_descr_read">SpyDroid does not have permission to read the specified directory:\n</string>
+	<string name="coll_file_system_error_descr_exist1">The specified directory </string>
+	<string name="coll_file_system_error_descr_exist2">does not exist, and thus cannot be read.</string>
+	<string name="coll_file_system_error_title_exist">Directory does not exist</string>
 </resources>

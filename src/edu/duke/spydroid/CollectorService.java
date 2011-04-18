@@ -108,8 +108,10 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 			}
 		//Handle the individual collector updated
 		for (AbstractCollector col : collectors) {
-			if (col.getPreferenceKey().equals(key)) {
+			if (col.getPreferenceKey().startsWith(key)) {
 				updateCollecting(sharedPreferences, key, col);
+				//TODO: Check this
+				col.onSharedPreferenceChanged(sharedPreferences, key);
 			}
 		}
 	}
