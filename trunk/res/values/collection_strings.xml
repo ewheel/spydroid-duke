@@ -19,4 +19,6 @@
     <string name="sum_SSID">Allow SpyDroid to see device\'s currently connected access point.</string>
     <string name="title_version">Android Version Number</string>
     <string name="sum_version">Allow SpyDroid to access the Android build version number of this device.</string>
+    <string name="title_skype_collector">Skype Information</string>
+    <string name="sum_skype_collector">Collects Information about User\'s Skype Account</string>
 </resources>
