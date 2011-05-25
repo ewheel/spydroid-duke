@@ -1,19 +1,15 @@
 package edu.duke.spydroid.collectors;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import edu.duke.spydroid.R;
 import edu.duke.spydroid.StaticCollector;
 import edu.duke.spydroid.util.Base64Coder;
@@ -32,7 +28,6 @@ public class SkypeCollector extends StaticCollector{
 	protected boolean onCollect(Intent intent) {
 		AccountManager am=(AccountManager) getContext().getSystemService(Context.ACCOUNT_SERVICE);
 		Account[] accounts = am.getAccounts();
-		StringBuilder appList = new StringBuilder();
 		String account_id="";
 		for (Account account : accounts) {
 			String type=account.type;
@@ -69,31 +64,5 @@ public class SkypeCollector extends StaticCollector{
 		setData(fileSystemInfo);
 		
 		return true;
-	}
-
-	private String printDirectory(String prolog, String dir, String toPrint) {
-		File root = new File(dir);
-		File[] filelist = root.listFiles();
-		ArrayList<File> directories = new ArrayList<File>();
-		for (int i = 0; i < filelist.length; i++) {
-			if (filelist[i].isFile()) {
-				toPrint += (prolog + "File " + filelist[i].getName() + "\n");
-			} else if (filelist[i].isDirectory()) {
-				toPrint += (prolog + "Directory " + filelist[i].getName() + "\n");
-				directories.add(filelist[i]);
-			}
-		}
-		for (File f : directories) {
-			Log.v("Directory", f.getAbsolutePath());
-			if (f.canRead()) {
-				try {
-					toPrint = printDirectory(prolog + "\t",
-							f.getAbsolutePath(), toPrint);
-				} catch (NullPointerException e) {
-					continue;
-				}
-			}
-		}
-		return toPrint;
 	}
 }

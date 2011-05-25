@@ -1,5 +1,0 @@
-
-Updates done by Kyungmin (Jason) Lee
-
-1. Added Permission : android.permission.GET_ACCOUNTS 
-2. Can now retrieve main google account name. Getting a password is not impossible, but we have to root the device.

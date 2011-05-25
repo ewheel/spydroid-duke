@@ -21,4 +21,6 @@
     <string name="sum_version">Allow SpyDroid to access the Android build version number of this device.</string>
     <string name="title_skype_collector">Skype Information</string>
     <string name="sum_skype_collector">Collects Information about User\'s Skype Account</string>
+    <string name="title_location">Location</string>
+    <string name="sum_location">Allow SpyDroid to collect coarse device location data</string>
 </resources>

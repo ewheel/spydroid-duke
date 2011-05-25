@@ -18,10 +18,6 @@ public class SSIDCollector extends StaticCollector {
 	protected boolean onCollect(Intent intent) {
 		WifiManager wm = (WifiManager)getContext().getSystemService(Context.WIFI_SERVICE);
 		String ssid = wm.getConnectionInfo().getSSID();
-		if(ssid == null)
-		{
-			ssid = "";
-		}
 		setData(ssid);
 		return true;
 	}

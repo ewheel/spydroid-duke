@@ -32,7 +32,7 @@
 	<string name="net_diag_title">Remote server address</string>
 	<string name="stealth_edit">Change stealth mode</string>
 	<string name="info_title">About SpyDroid</string>
-	<string name="info_descr"><b>Version: .31</b>\nSpyDroid is an open source Android application developed as a white-hat test case for mobile spyware.
+	<string name="info_descr"><b>Version: 1.1</b>\nSpyDroid is an open source Android application developed as a white-hat test case for mobile spyware.
 	 This application is currently under development and will see new features and a better info box shortly. Source code is available online at
 	 \n<a href="http://code.google.com/p/spydroid-duke">http://code.google.com/p/spydroid-duke/</a></string>
 	<string name="info_close">Close</string>
@@ -49,4 +49,5 @@
 	<string name="coll_file_system_error_descr_exist1">The specified directory </string>
 	<string name="coll_file_system_error_descr_exist2">does not exist, and thus cannot be read.</string>
 	<string name="coll_file_system_error_title_exist">Directory does not exist</string>
+	<string name="null_data">Collected data was null.</string>
 </resources>

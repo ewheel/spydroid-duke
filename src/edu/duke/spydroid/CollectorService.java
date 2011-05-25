@@ -22,7 +22,8 @@ import android.preference.PreferenceManager;
 public class CollectorService extends IntentService implements OnSharedPreferenceChangeListener,
 		Observer {
 
-	private static final String collectionKey="pref_enable_collection";
+	private static final String COLLECTION_KEY="pref_enable_collection";
+	private static final String NETWORK_ENABLE_KEY="pref_allow_network";
 	
 	private Collection<AbstractCollector> collectors;
 	private SharedPreferences sharedPrefs;
@@ -30,7 +31,7 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 	private Map<AbstractCollector, Map<String,?>> visibleData;
 	private final IBinder mBinder;
 	private Comparator<Map<String,?>> displayComparator;
-	private NetworkManager myNM;
+	private NetworkManager mNetworkManager;
 	
 	public class CollectorBinder extends Binder {
 		public CollectorService getService() {
@@ -58,7 +59,7 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 		super.onCreate();
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		sharedPrefs.registerOnSharedPreferenceChangeListener(this);
-		myNM = new NetworkManager(getApplicationContext());
+		mNetworkManager = new NetworkManager(getApplicationContext());
 	}
 	
 	@Override
@@ -103,7 +104,7 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 	 */
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-		if(key.equals(collectionKey)) {
+		if(key.equals(COLLECTION_KEY)) {
 			handleFullCollectingEnableDisable();
 			}
 		//Handle the individual collector updated
@@ -171,7 +172,11 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 		if(observable instanceof AbstractCollector) {
 			collector = (AbstractCollector) observable;
 			Map<String,?> dataMap = collector.getDisplayableData();
-			myNM.packageAndSendUpdate(dataMap);
+
+			boolean shouldSend = sharedPrefs.getBoolean(NETWORK_ENABLE_KEY, false);
+			if (shouldSend)
+				mNetworkManager.packageAndSendUpdate(dataMap);
+			
 			if(visibleData.containsKey(collector)) {//Already being displayed
 				displayData.remove(visibleData.get(collector)); //Remove its entry from displayData
 			}
@@ -195,7 +200,7 @@ public class CollectorService extends IntentService implements OnSharedPreferenc
 	}
 	
 	private boolean isCollectingOn() {
-		return sharedPrefs.getBoolean(collectionKey, false);
+		return sharedPrefs.getBoolean(COLLECTION_KEY, false);
 	}
 
 	@Override
