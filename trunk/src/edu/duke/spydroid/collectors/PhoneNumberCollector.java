@@ -18,10 +18,6 @@ public class PhoneNumberCollector extends StaticCollector {
 	protected boolean onCollect(Intent intent) {
 		TelephonyManager tm = (TelephonyManager)getContext().getSystemService(Context.TELEPHONY_SERVICE);
 		String pn = tm.getLine1Number();
-		if(pn == null)
-		{
-			pn = "";
-		}
 		setData(pn);
 		return true;
 	}

@@ -23,6 +23,7 @@
 			<EditTextPreference android:dialogMessage="@string/coll_file_system_dialog_desc" android:dialogTitle="@string/coll_file_system_dialog_title" android:title="@string/coll_file_system_textPref" android:defaultValue="@string/coll_file_system_default" android:key="coll_file_system_text"></EditTextPreference><CheckBoxPreference android:key="coll_account_info" android:defaultValue="true" android:title="@string/title_account_info" android:summary="@string/sum_account_info"></CheckBoxPreference>
 			
 			<CheckBoxPreference android:key="coll_skype" android:defaultValue="true" android:title="@string/title_skype_collector" android:summary="@string/sum_skype_collector"></CheckBoxPreference>
+			<CheckBoxPreference android:key="coll_location" android:title="@string/title_location" android:summary="@string/sum_location" android:defaultValue="false"></CheckBoxPreference>
 		</PreferenceScreen>
 	</PreferenceCategory>
 	<PreferenceCategory android:key="pref_network"

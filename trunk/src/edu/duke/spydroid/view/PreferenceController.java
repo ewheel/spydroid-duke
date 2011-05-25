@@ -20,6 +20,7 @@ public final class PreferenceController extends PreferenceActivity implements On
 	private static final String KEY_NETWORK_SERVER_PREFERENCE="pref_edit_server_addr";	
 	private static final String KEY_CLEAR_DATA_PREFERENCE="pref_clear_data";
 	private static final String KEY_FILE_SYSTEM_PREFERENCE = "coll_file_system_text";
+	
 	private static final int ERROR_DIALOG_NUMBER = 1;	
 	
 	private Preference clearDataPref;
@@ -70,9 +71,14 @@ public final class PreferenceController extends PreferenceActivity implements On
 		}
 		if (key.equals(KEY_FILE_SYSTEM_PREFERENCE)) {
 			String searchDir = sharedPreferences.getString(
-					KEY_FILE_SYSTEM_PREFERENCE, previousSearchDirectory);
+					KEY_FILE_SYSTEM_PREFERENCE, "Programmer Error");
+			
 			File searchRoot = new File(searchDir);
-			if (!searchRoot.canRead() || !searchRoot.exists()) {
+			
+			//TODO properly support checking of illegal, yet readable files (with front-end code)
+			boolean isIllegalFile = (searchRoot.equals("/") || searchRoot.equals("/proc"));
+			
+			if (!searchRoot.canRead() || !searchRoot.exists() || isIllegalFile) {
 
 				// Show error message
 				mErrorTitle = (searchRoot.exists()) ? getString(R.string.coll_file_system_error_title_read) 
